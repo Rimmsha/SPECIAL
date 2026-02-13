@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For My Ullu 💖</title>
+
+<style>
+body {
+  margin: 0;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #ff9a9e, #fecfef);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+  color: white;
+}
+
+button {
+  padding: 12px 25px;
+  font-size: 18px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.yes { background-color: #ff4d6d; color: white; }
+.no { background-color: #555; color: white; }
+
+#countdown { font-size: 60px; display: none; }
+#question, #buttons, #loveMessage { display: none; }
+
+#loveMessage {
+  position: absolute;
+  font-size: 40px;
+  text-align: center;
+  animation: pop 1s ease-in-out infinite alternate;
+}
+
+@keyframes pop {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+
+.heart {
+  position: absolute;
+  color: red;
+  animation: float 5s linear infinite;
+}
+
+@keyframes float {
+  from { transform: translateY(100vh); opacity: 1; }
+  to { transform: translateY(-10vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<button id="startBtn" onclick="startLove()">Tap to Start 💖</button>
+
+<div id="countdown">3</div>
+
+<h1 id="question">
+My Ullu 🥺💖<br><br>
+Will you be my Valentine? 🌹
+</h1>
+
+<div id="buttons">
+<button class="yes" onclick="sayYes()">Yes 💕</button>
+<button class="no" onclick="moveButton()">No 🙈</button>
+</div>
+
+<div id="loveMessage">
+🧸💖<br>
+I LOVE YOU ❤️<br>
+I LOVE YOU ❤️<br>
+I LOVE YOU ❤️
+</div>
+
+<!-- YOUR EXACT SONG NAME INSERTED HERE -->
+<audio id="bgMusic" loop>
+  <source src="Sukoon Mila-320kbps.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+function startLove() {
+  document.getElementById("bgMusic").play();
+  document.getElementById("startBtn").style.display = "none";
+  document.getElementById("countdown").style.display = "block";
+
+  let timeLeft = 3;
+  let countdown = document.getElementById("countdown");
+
+  let timer = setInterval(function() {
+    timeLeft--;
+    countdown.innerHTML = timeLeft;
+
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      countdown.style.display = "none";
+      document.getElementById("question").style.display = "block";
+      document.getElementById("buttons").style.display = "block";
+    }
+  }, 1000);
+}
+
+function moveButton() {
+  const button = document.querySelector('.no');
+  button.style.position = 'absolute';
+  button.style.top = Math.random() * window.innerHeight + 'px';
+  button.style.left = Math.random() * window.innerWidth + 'px';
+}
+
+function sayYes() {
+  document.getElementById("question").style.display = "none";
+  document.getElementById("buttons").style.display = "none";
+  document.getElementById("loveMessage").style.display = "block";
+  createHearts();
+}
+
+function createHearts() {
+  setInterval(function() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 20 + 20 + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => { heart.remove(); }, 5000);
+  }, 300);
+}
+
+</script>
+
+</body>
+</html>
